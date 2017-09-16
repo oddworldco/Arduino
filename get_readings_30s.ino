@@ -8,25 +8,26 @@ void loop() {
   AccelerationReading currentAccel = Bean.getAcceleration();
   
   uint16_t batteryReading =  Bean.getBatteryVoltage(); 
-  
   int temperature = Bean.getTemperature();
-  
-  String nameToPrint = String();
-  nameToPrint = "andrew_bean";
-  String stringToPrint = String();
-  stringToPrint = stringToPrint + "Battery voltage: " + batteryReading/100 + "." + batteryReading%100 + " V";
-  
-  Serial.println(stringToPrint);
-  Serial.println(nameToPrint);
+  String nameToPrint = "rachel_bean";
 
-  Serial.print("Temperature:");
-  Serial.print(temperature);
-  Serial.print("x:");
-  Serial.print(currentAccel.xAxis);
-  Serial.print("y:");
-  Serial.print(currentAccel.yAxis);
-  Serial.print("z:");
-  Serial.print(currentAccel.zAxis);
+  uint16_t stringToPrint = batteryReading;
+  int tempToPrint = temperature;
+  int xToPrint = currentAccel.xAxis;
+  int yToPrint = currentAccel.yAxis;
+  int zToPrint = currentAccel.zAxis;
+  
+  String object = "name:" + nameToPrint + ", temp:" + tempToPrint + ", x:" + xToPrint + ", y:" + yToPrint + ", z:" + zToPrint + ", battery:" + stringToPrint;
+
+
+  //Serial.println(nameToPrint);
+  //Serial.println(stringToPrint);
+  //Serial.print(tempToPrint);
+  //Serial.print(xToPrint);
+  //Serial.print(yToPrint);
+  //Serial.print(zToPrint);
+
+  Serial.print(object);
   
   Bean.sleep(30000);
 }
