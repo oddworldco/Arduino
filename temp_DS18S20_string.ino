@@ -34,7 +34,7 @@ void loop(void)
 
   uint16_t batteryReading = Bean.getBatteryVoltage();
   int beanTemp = Bean.getTemperature();
-  String nameToPrint = "rachel_bean";
+  String nameToPrint = "bean_1";
   int xToPrint = currentAccel.xAxis;
   int yToPrint = currentAccel.yAxis;
   int zToPrint = currentAccel.zAxis;
