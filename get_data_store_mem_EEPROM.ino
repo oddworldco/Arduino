@@ -30,11 +30,16 @@ void setup()
   // read bean board values
   String nameToPrint = "bean_2";
   Bean.setBeanName("bean_2");
+
+  //Reset the EEPROM data
+  for (int i = 0 ; i < EEPROM.length() ; i++) {
+    EEPROM.write(i, 0);}
 }
     //float bodyTemp; //4b
     //int beanTemp;  //2b
     //int bTime; ///?
-    char data[10];
+    String data;
+
   
 void loop()
 { 
@@ -43,12 +48,13 @@ void loop()
   int p;
   int eeAddress = 0;
   float lastBodyTemp = 00.00;
-  EEPROM.get(eeAddress, p);
+  //EEPROM.get(eeAddress, p);
   Serial.print(p);
   
-  for(int l = 0; l <= p; l++)
+  for(int l = 0; l <= EEPROM.length(); l++)
   {
     EEPROM.get(l, data);
+    Serial.print("memory");
     Serial.print(data);
     } 
    
@@ -59,9 +65,7 @@ void loop()
   eeAddress = 0;//location for data to be put
 
   EEPROM.put(eeAddress, p); //place pointer in EERPOM
-  
-  for(int i = 0; i < 660; i++)
-{   
+
   bool connectionState = Bean.getConnectionState();
   if (connectionState == false) {
   // Blink Red LED to alert user device is not connected
@@ -75,7 +79,8 @@ void loop()
     Bean.setLed(0, 0, 0);
     }
   
-
+  for(int i = 0; i < 660; i++)
+{   
   sensors.setWaitForConversion(true);  // changed from false
   sensors.requestTemperatures();
 
@@ -120,8 +125,8 @@ void loop()
   p = eeAddress + sizeof(bTime);// reset the address to include size of latest reading
   }
 
-//sleep for 1 minute
- Bean.sleep(60000);
+//sleep for 1 minuteCHANGE BACK
+ Bean.sleep(3000);
  }
  Bean.sleep(0xFFFFFFFF);
 }
